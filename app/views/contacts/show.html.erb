@@ -97,14 +97,7 @@
                     <% end %>
                 </dd>
             </div>
-            <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
-                <dt class="text-sm leading-5 font-medium text-gray-500">
-                    Willing to Pay ?
-                </dt>
-                <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                    <%= @contact.willing_to_pay ? 'Yes' : 'No' %>
-                </dd>
-            </div>
+            <% if current_user.doctor? %>
             <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
                 <dt class="text-sm leading-5 font-medium text-gray-500">
                     Medical Requirements
@@ -148,6 +141,7 @@
                     <% end %>
                 </dd>
             </div>
+            <% end %>
             <% if current_user.panchayat_admin? %>
             <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
                 <dt class="text-sm leading-5 font-medium text-gray-500">
@@ -196,6 +190,7 @@
                         <%= f.input :sorethroat_diarrhoea , input_html: {class: 'form-checkbox mr-1 p-2'} %>
                         <%= f.input :fever_cough , input_html: {class: 'form-checkbox mr-1 p-2'} %>
                         <%= f.input :breathing_difficulty , input_html: {class: 'form-checkbox mr-1 p-2'} %>
+                        <%= f.association :user, label: "Assigned Doctor", collection: User.where(role: :doctor), input_html: {class: 'form-select', id: 'dropdown-choice-select'} %>
                         <%= f.input :feedback, label: 'Feedback Comments if Any' %>
                         <%= f.button :submit, 'Save', class: 'inline-flex items-center px-3 py-3 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150' %>
                     </div>
