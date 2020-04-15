@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_08_082213) do
+ActiveRecord::Schema.define(version: 2020_04_15_075404) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,31 @@ ActiveRecord::Schema.define(version: 2020_04_08_082213) do
     t.date "date_of_contact"
     t.string "tracking_type"
     t.text "panchayat_feedback"
+    t.boolean "covid_19_was_confirmed"
+    t.boolean "contact_with_suspected_14_days"
+    t.boolean "contact_with_confirmed_14_days"
+    t.boolean "travel_non_risk_area_4_6"
+    t.boolean "travel_non_risk_area_0_3"
+    t.boolean "travel_risk_area_4_6"
+    t.boolean "travel_risk_area_0_3"
+    t.boolean "cormobidity_hypertension"
+    t.boolean "cormobidity_diabetes"
+    t.boolean "cormobidity_cardio"
+    t.boolean "cormobidity_liver"
+    t.boolean "cormobidity_renal"
+    t.boolean "cormobidity_hypercholestrolemia"
+    t.boolean "cormobidity_hiv"
+    t.boolean "cormobidity_cancer"
+    t.boolean "cormobidity_pregnancy"
+    t.boolean "cormobidity_respiratory"
+    t.boolean "regular_treatment"
+    t.boolean "surgeries_three_years"
+    t.boolean "on_immunosuppresants"
+    t.boolean "history_of_transplants"
+    t.boolean "asomia_cold_rhinorrhea"
+    t.boolean "sorethroat_diarrhoea"
+    t.boolean "fever_cough"
+    t.boolean "breathing_difficulty"
     t.index ["panchayat_id"], name: "index_contacts_on_panchayat_id"
     t.index ["phone"], name: "index_contacts_on_phone", unique: true
   end
