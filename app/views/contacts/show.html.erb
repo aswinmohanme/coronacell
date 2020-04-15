@@ -148,49 +148,6 @@
                     <% end %>
                 </dd>
             </div>
-            <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
-                <dt class="text-sm leading-5 font-medium text-gray-500">
-                    Non Medical Requirements
-                </dt>
-                <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                    <ul>
-                        <% @contact.non_medical_reqs.each do |non_medical_req| %>
-                        <% if not (non_medical_req.fullfilled? or non_medical_req.not_able_type?) %>
-                        <li class="mt-2	block p-2 flex items-center justify-between border rounded">
-                            <div>
-                                <p>
-                                    Needs <%= non_medical_req.requirement_type.to_s.titleize %>
-                                </p>
-                                <p class="text-gray-600">
-                                    Other Comments: <%= non_medical_req.other_needs %>
-                                </p>
-                            </div>
-                            <div>
-                                <span class="text-xs">
-                                    <%= time_ago_in_words(non_medical_req.created_at) %> ago
-                                </span>
-                                <% if current_user.admin? or current_user.district_admin? %>
-                                <%= link_to 'Cancel',contact_non_medical_req_path(id: non_medical_req.id, contact_id: @contact.id) ,method: :delete,class: 'inline-flex ml-2 items-center px-2 py-1 border border-transparent text-xs leading-4 font-medium rounded-md text-red-700 bg-red-100 hover:bg-indigo-50 focus:outline-none focus:border-indigo-300 focus:shadow-outline-indigo active:bg-indigo-200 transition ease-in-out duration-150' %>
-                                <% end %>
-                                <% if current_user.panchayat_admin? %>
-                                <%= link_to 'Complete', fullfill_contact_non_medical_req_path(id: non_medical_req.id, contact_id: @contact.id) ,class: 'inline-flex ml-2 items-center px-2 py-1 border border-transparent text-xs leading-4 font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-50 focus:outline-none focus:border-indigo-300 focus:shadow-outline-indigo active:bg-indigo-200 transition ease-in-out duration-150' %>
-                                <%= link_to 'Delivery Issue',not_able_contact_non_medical_req_path(not_able_type: :undeliverable, id: non_medical_req.id, contact_id: @contact.id),class: 'inline-flex ml-2 items-center px-2 py-1 border border-transparent text-xs leading-4 font-medium rounded-md text-red-700 bg-red-100 hover:bg-indigo-50 focus:outline-none focus:border-indigo-300 focus:shadow-outline-indigo active:bg-indigo-200 transition ease-in-out duration-150' %>
-                                <%= link_to 'Other Issues',not_able_contact_non_medical_req_path(not_able_type: :other_reasons, id: non_medical_req.id, contact_id: @contact.id),class: 'inline-flex ml-2 items-center px-2 py-1 border border-transparent text-xs leading-4 font-medium rounded-md text-red-700 bg-red-100 hover:bg-indigo-50 focus:outline-none focus:border-indigo-300 focus:shadow-outline-indigo active:bg-indigo-200 transition ease-in-out duration-150' %>
-                                <% end %>
-                            </div>
-                        </li>
-                        <% end %>
-                        <% end %>
-                    </ul>
-                    <% if not current_user.panchayat_admin? %>
-                    <div class="mt-4">
-                        <hr />
-                        <h4 class="mt-4 text-gray-600">Add new Non Medical Requirements</h4>
-                        <%= render 'non_medical_reqs/form' %>
-                    </div>
-                    <% end %>
-                </dd>
-            </div>
             <% if current_user.panchayat_admin? %>
             <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
                 <dt class="text-sm leading-5 font-medium text-gray-500">
@@ -214,7 +171,31 @@
                     <% if not current_user.panchayat_admin? %>
                     <%= simple_form_for @contact, defaults: { input_html: {class: 'form-input mt-1 font-sans'}, wrapper_html: {class: 'flex flex-col my-4'}, label_html: {class: 'mb-1'}} do |f|%>
                     <div class="">
-                        <%= f.input :willing_to_pay, label: 'Wiling to Pay for Request ?', input_html: {class: 'form-checkbox mr-1 p-2'} %>
+                        <%= f.input :covid_19_was_confirmed, input_html: {class: 'form-checkbox mr-1 p-2'}%>
+                        <%= f.input :contact_with_suspected_14_days , input_html: {class: 'form-checkbox mr-1 p-2'} %>
+                        <%= f.input :contact_with_confirmed_14_days , input_html: {class: 'form-checkbox mr-1 p-2'} %>
+                        <%= f.input :travel_non_risk_area_4_6 , input_html: {class: 'form-checkbox mr-1 p-2'} %>
+                        <%= f.input :travel_non_risk_area_0_3 , input_html: {class: 'form-checkbox mr-1 p-2'} %>
+                        <%= f.input :travel_risk_area_4_6 , input_html: {class: 'form-checkbox mr-1 p-2'} %>
+                        <%= f.input :travel_risk_area_0_3 , input_html: {class: 'form-checkbox mr-1 p-2'} %>
+                        <%= f.input :cormobidity_hypertension , input_html: {class: 'form-checkbox mr-1 p-2'} %>
+                        <%= f.input :cormobidity_diabetes , input_html: {class: 'form-checkbox mr-1 p-2'} %>
+                        <%= f.input :cormobidity_cardio , input_html: {class: 'form-checkbox mr-1 p-2'} %>
+                        <%= f.input :cormobidity_liver , input_html: {class: 'form-checkbox mr-1 p-2'} %>
+                        <%= f.input :cormobidity_renal , input_html: {class: 'form-checkbox mr-1 p-2'} %>
+                        <%= f.input :cormobidity_hypercholestrolemia , input_html: {class: 'form-checkbox mr-1 p-2'} %>
+                        <%= f.input :cormobidity_hiv , input_html: {class: 'form-checkbox mr-1 p-2'} %>
+                        <%= f.input :cormobidity_cancer , input_html: {class: 'form-checkbox mr-1 p-2'} %>
+                        <%= f.input :cormobidity_pregnancy , input_html: {class: 'form-checkbox mr-1 p-2'} %>
+                        <%= f.input :cormobidity_respiratory , input_html: {class: 'form-checkbox mr-1 p-2'} %>
+                        <%= f.input :regular_treatment , input_html: {class: 'form-checkbox mr-1 p-2'} %>
+                        <%= f.input :surgeries_three_years , input_html: {class: 'form-checkbox mr-1 p-2'} %>
+                        <%= f.input :on_immunosuppresants , input_html: {class: 'form-checkbox mr-1 p-2'} %>
+                        <%= f.input :history_of_transplants , input_html: {class: 'form-checkbox mr-1 p-2'} %>
+                        <%= f.input :asomia_cold_rhinorrhea , input_html: {class: 'form-checkbox mr-1 p-2'} %>
+                        <%= f.input :sorethroat_diarrhoea , input_html: {class: 'form-checkbox mr-1 p-2'} %>
+                        <%= f.input :fever_cough , input_html: {class: 'form-checkbox mr-1 p-2'} %>
+                        <%= f.input :breathing_difficulty , input_html: {class: 'form-checkbox mr-1 p-2'} %>
                         <%= f.input :feedback, label: 'Feedback Comments if Any' %>
                         <%= f.button :submit, 'Save', class: 'inline-flex items-center px-3 py-3 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150' %>
                     </div>
