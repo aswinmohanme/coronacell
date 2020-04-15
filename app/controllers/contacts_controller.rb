@@ -17,7 +17,7 @@ class ContactsController < ApplicationController
       @contacts = contacts_called_by_user_today
     end
 
-    if current_user.panchayat_admin? or  @act_as_panchayat
+    if current_user.panchayat_admin? ||  @act_as_panchayat
       if @act_as_panchayat
         panchayat = Panchayat.find_by(name: params[:panchayat_name])
         @contacts = unscoped_contacts.where(panchayat: panchayat)
@@ -29,7 +29,7 @@ class ContactsController < ApplicationController
 
       @non_medical_count_remaining = Contact.where(panchayat: panchayat).joins(:non_medical_reqs).where(non_medical_reqs: { fullfilled: nil, not_able_type: nil }).distinct.count
       @medical_count_remaining = Contact.where(panchayat: panchayat).joins(:medical_reqs).where(medical_reqs: { fullfilled: nil, not_able_type: nil }).distinct.count
-    elsif current_user.district_admin? or current_user.admin?
+    elsif current_user.district_admin? || current_user.admin?
       today = Time.zone.now.beginning_of_day..Time.zone.now.end_of_day
       @non_medical_today_count = NonMedicalReq.where(created_at: today).distinct.count
       @medical_today_count = MedicalReq.where(created_at: today).distinct.count
@@ -144,8 +144,8 @@ class ContactsController < ApplicationController
   end
 
   def generate_complete_reqs
-    completed_ids = Contact.joins(:non_medical_reqs).where.not(non_medical_reqs: {fullfilled: nil}).distinct.pluck(:id) +
-                    Contact.joins(:medical_reqs).where.not(medical_reqs: {fullfilled: nil}).distinct.pluck(:id)
+    completed_ids = Contact.joins(:non_medical_reqs).where.not(non_medical_reqs: { fullfilled: nil }).distinct.pluck(:id) +
+                    Contact.joins(:medical_reqs).where.not(medical_reqs: { fullfilled: nil }).distinct.pluck(:id)
     unscoped_contacts = Contact.where(id: completed_ids).distinct
     contacts = scope_access(unscoped_contacts)
     respond_to do |format|
