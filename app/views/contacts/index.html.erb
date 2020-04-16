@@ -152,7 +152,7 @@
     <% end %>
 </div>
 
-<% if current_user.panchayat_admin? or current_user.phone_caller? or @act_as_panchayat%>
+<% if current_user.panchayat_admin? or current_user.phone_caller? or @act_as_panchayat or @current_user.doctor?%>
 <div class="mt-4 flex flex-col">
     <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
         <div class="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200">
