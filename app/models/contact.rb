@@ -12,7 +12,7 @@ class Contact < ApplicationRecord
   has_many :calls
   has_many :callees, through: :calls, source: :user
 
-  belongs_to :user
+  belongs_to :user, optional: true
 
   def self.to_csv
     attributes = %w{name phone house_name ward panchayat to_pay card_color family_members non_medical_needs medical_needs}
