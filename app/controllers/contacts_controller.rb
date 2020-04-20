@@ -16,8 +16,12 @@ class ContactsController < ApplicationController
       contacts_called_by_user_today = Contact.joins(:calls).where(calls: { user_id: current_user.id, created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day }).distinct
       @contacts = contacts_called_by_user_today
     end
+    
+    if current_user.doctor?
+      @contacts = current_user.contacts
+    end
 
-    if current_user.panchayat_admin? or  @act_as_panchayat
+    if current_user.panchayat_admin? ||  @act_as_panchayat
       if @act_as_panchayat
         panchayat = Panchayat.find_by(name: params[:panchayat_name])
         @contacts = unscoped_contacts.where(panchayat: panchayat)
@@ -29,7 +33,7 @@ class ContactsController < ApplicationController
 
       @non_medical_count_remaining = Contact.where(panchayat: panchayat).joins(:non_medical_reqs).where(non_medical_reqs: { fullfilled: nil, not_able_type: nil }).distinct.count
       @medical_count_remaining = Contact.where(panchayat: panchayat).joins(:medical_reqs).where(medical_reqs: { fullfilled: nil, not_able_type: nil }).distinct.count
-    elsif current_user.district_admin? or current_user.admin?
+    elsif current_user.district_admin? || current_user.admin?
       today = Time.zone.now.beginning_of_day..Time.zone.now.end_of_day
       @non_medical_today_count = NonMedicalReq.where(created_at: today).distinct.count
       @medical_today_count = MedicalReq.where(created_at: today).distinct.count
@@ -144,8 +148,8 @@ class ContactsController < ApplicationController
   end
 
   def generate_complete_reqs
-    completed_ids = Contact.joins(:non_medical_reqs).where.not(non_medical_reqs: {fullfilled: nil}).distinct.pluck(:id) +
-                    Contact.joins(:medical_reqs).where.not(medical_reqs: {fullfilled: nil}).distinct.pluck(:id)
+    completed_ids = Contact.joins(:non_medical_reqs).where.not(non_medical_reqs: { fullfilled: nil }).distinct.pluck(:id) +
+                    Contact.joins(:medical_reqs).where.not(medical_reqs: { fullfilled: nil }).distinct.pluck(:id)
     unscoped_contacts = Contact.where(id: completed_ids).distinct
     contacts = scope_access(unscoped_contacts)
     respond_to do |format|
@@ -181,6 +185,7 @@ class ContactsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def contact_params
-      params.require(:contact).permit(:name, :phone, :gender, :age, :house_name, :ward, :landmark, :panchayat_id, :ration_type, :willing_to_pay, :number_of_family_members, :feedback, :user_id, :date_of_contact, :tracking_type, :panchayat_feedback)
+      params.require(:contact).permit(:name, :phone, :gender, :age, :house_name, :ward, :landmark, :panchayat_id, :ration_type, :willing_to_pay, :number_of_family_members, :feedback, :user_id, :date_of_contact, :tracking_type, :panchayat_feedback,
+                        :covid_19_was_confirmed,                        :contact_with_suspected_14_days,                        :contact_with_confirmed_14_days,                        :travel_non_risk_area_4_6,                        :travel_non_risk_area_0_3,                        :travel_risk_area_4_6,                        :travel_risk_area_0_3,                        :cormobidity_hypertension,                        :cormobidity_diabetes,                        :cormobidity_cardio,                        :cormobidity_liver,                        :cormobidity_renal,                        :cormobidity_hypercholestrolemia,                        :cormobidity_hiv,                        :cormobidity_cancer,                        :cormobidity_pregnancy,                        :cormobidity_respiratory,                        :regular_treatment,                        :surgeries_three_years,                        :on_immunosuppresants,                        :history_of_transplants,                        :asomia_cold_rhinorrhea,                        :sorethroat_diarrhoea,                        :fever_cough,                        :breathing_difficulty)
     end
 end
