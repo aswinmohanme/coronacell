@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_16_085647) do
+ActiveRecord::Schema.define(version: 2020_04_20_094216) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,7 +55,6 @@ ActiveRecord::Schema.define(version: 2020_04_16_085647) do
     t.boolean "cormobidity_liver"
     t.boolean "cormobidity_renal"
     t.boolean "cormobidity_hypercholestrolemia"
-    t.boolean "cormobidity_hiv"
     t.boolean "cormobidity_cancer"
     t.boolean "cormobidity_pregnancy"
     t.boolean "cormobidity_respiratory"
@@ -68,6 +67,8 @@ ActiveRecord::Schema.define(version: 2020_04_16_085647) do
     t.boolean "fever_cough"
     t.boolean "breathing_difficulty"
     t.bigint "user_id"
+    t.boolean "cormobidity_std"
+    t.integer "score"
     t.index ["panchayat_id"], name: "index_contacts_on_panchayat_id"
     t.index ["phone"], name: "index_contacts_on_phone", unique: true
     t.index ["user_id"], name: "index_contacts_on_user_id"
