@@ -100,6 +100,7 @@ class ContactsController < ApplicationController
   # PATCH/PUT /contacts/1
   # PATCH/PUT /contacts/1.json
   def update
+    @contact.score = calculate_risk_score(contact_params)
     respond_to do |format|
       if @contact.update(contact_params)
         format.html { redirect_to @contact, notice: "Contact was successfully updated." }
@@ -186,4 +187,45 @@ class ContactsController < ApplicationController
     def contact_params
       params.require(:contact).permit(:name, :phone, :gender, :age, :house_name, :ward, :landmark, :panchayat_id, :ration_type, :willing_to_pay, :number_of_family_members, :feedback, :user_id, :date_of_contact, :tracking_type, :panchayat_feedback, :covid_19_was_confirmed,   :contact_with_suspected_14_days,   :contact_with_confirmed_14_days,   :travel_non_risk_area_4_6,   :travel_non_risk_area_0_3,   :travel_risk_area_4_6,   :travel_risk_area_0_3,   :cormobidity_hypertension,   :cormobidity_diabetes,   :cormobidity_cardio,   :cormobidity_liver,   :cormobidity_renal,   :cormobidity_hypercholestrolemia,   :cormobidity_std,   :cormobidity_cancer,   :cormobidity_pregnancy,   :cormobidity_respiratory,   :regular_treatment,   :surgeries_three_years,   :on_immunosuppresants,   :history_of_transplants,   :asomia_cold_rhinorrhea,   :sorethroat_diarrhoea,   :fever_cough,   :breathing_difficulty)
     end
+    
+  def calculate_risk_score(params)
+    score_board = [
+      {name: :covid_19_was_confirmed, score: 6},
+      {name: :contact_with_suspected_14_days, score:5 },
+      {name: :contact_with_confirmed_14_days, score: 10},
+      {name: :travel_non_risk_area_4_6, score: 2 },
+      {name: :travel_non_risk_area_0_3, score: 4 },
+      {name: :travel_risk_area_4_6, score: 8 },
+      {name: :travel_risk_area_0_3, score: 10 },
+      {name: :cormobidity_hypertension, score: 1},
+      {name: :cormobidity_diabetes, score: 1},
+      {name: :cormobidity_cardio, score: 1},
+      {name: :cormobidity_liver, score: 1},
+      {name: :cormobidity_renal, score: 1},
+      {name: :cormobidity_hypercholestrolemia, score: 1},
+      {name: :cormobidity_cancer, score: 1},
+      {name: :cormobidity_std, score: 1},
+      {name: :cormobidity_pregnancy, score: 1 },
+      {name: :cormobidity_respiratory, score: 2},
+      {name: :regular_treatment, score: 1},
+      {name: :surgeries_three_years, score: 3},
+      {name: :on_immunosuppresants, score: 4},
+      {name: :history_of_transplants, score: 5},
+      {name: :asomia_cold_rhinorrhea, score: 1},
+      {name: :sorethroat_diarrhoea, score: 1},
+      {name: :fever_cough, score: 1},
+      {name: :breathing_difficulty, score: 1}
+    ]
+    score = 0
+    params.each do |p|
+      if p.second == "1"
+        score_board.each do |s| 
+          if s[:name].to_s == p.first
+            score += s[:score]
+          end
+        end
+      end
+    end
+    return score
+  end
 end
