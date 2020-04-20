@@ -16,7 +16,6 @@ class ContactsController < ApplicationController
       contacts_called_by_user_today = Contact.joins(:calls).where(calls: { user_id: current_user.id, created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day }).distinct
       @contacts = contacts_called_by_user_today
     end
-    
     if current_user.doctor?
       @contacts = current_user.contacts
     end
