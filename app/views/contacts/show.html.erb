@@ -79,19 +79,6 @@
                     </ul>
                 </dd>
             </div>
-            <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
-                <dt class="text-sm leading-5 font-medium text-gray-500">
-                    Address
-                </dt>
-                <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                    <ul>
-                        <li class="my-2"><span class="font-bold">House:</span> <span><%= @contact.house_name %></span></li>
-                        <li class="my-2"><span class="font-bold">Ward: </span><%= @contact.ward %></span></li>
-                        <li class="my-2"><span class="font-bold">Panchayat: </span><%= @contact.panchayat.name %></span></li>
-                        <li class="my-2"><span class="font-bold">Landmark: </span><%= @contact.landmark %></span></li>
-                    </ul>
-                </dd>
-            </div>
             <% if current_user.doctor? %>
             <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
                 <dt class="text-sm leading-5 font-medium text-gray-500">
