@@ -160,46 +160,46 @@
                     <%= simple_form_for @contact, defaults: { input_html: {class: 'form-input mt-1 font-sans'}, wrapper_html: {class: 'flex flex-col my-4'}, label_html: {class: 'mb-1'}} do |f|%>
                     <hr class="block pt-4" />
                     <h3 class="font-bold">COVID-19 History</h3>
-                    <%= f.input :covid_19_was_confirmed, input_html: {class: 'form-checkbox mr-1 p-1'}%>
+                    <%= f.input :covid_19_was_confirmed, label: "Was previously Covid-19 Confirmed",input_html: {class: 'form-checkbox mr-1 p-1'}%>
 
                     <hr class="block pt-4" />
                     <h3 class="font-bold">Contact History</h3>
-                    <%= f.input :contact_with_suspected_14_days , input_html: {class: 'form-checkbox mr-1 p-1'} %>
-                    <%= f.input :contact_with_confirmed_14_days , input_html: {class: 'form-checkbox mr-1 p-1'} %>
+                    <%= f.input :contact_with_suspected_14_days , label: "Contact With A Suspected Case/ Contact / Co-traveller In Previous 14 Days", input_html: {class: 'form-checkbox mr-1 p-1'} %>
+                    <%= f.input :contact_with_confirmed_14_days , label: "Contact With A Confirmed Case Within Previous 14 Days", input_html: {class: 'form-checkbox mr-1 p-1'} %>
 
                     <hr class="block pt-4" />
                     <h3 class="font-bold">Travel History</h3>
-                    <%= f.input :travel_non_risk_area_4_6 , input_html: {class: 'form-checkbox mr-1 p-1'} %>
-                    <%= f.input :travel_non_risk_area_0_3 , input_html: {class: 'form-checkbox mr-1 p-1'} %>
-                    <%= f.input :travel_risk_area_4_6 , input_html: {class: 'form-checkbox mr-1 p-1'} %>
-                    <%= f.input :travel_risk_area_0_3 , input_html: {class: 'form-checkbox mr-1 p-1'} %>
+                    <%= f.input :travel_non_risk_area_4_6 , label: "Travel To A Non High Risk / Non Hot Spot Area In Previous 4-6 Months ", input_html: {class: 'form-checkbox mr-1 p-1'} %>
+                    <%= f.input :travel_non_risk_area_0_3 , label: "Travel To A Non High Risk / Non Hot Spot Area  In Previous 0-3 Months", input_html: {class: 'form-checkbox mr-1 p-1'} %>
+                    <%= f.input :travel_risk_area_4_6 , label: "Travel To A High Risk Country/ Hot Spot Area In Previous 4-6 Months", input_html: {class: 'form-checkbox mr-1 p-1'} %>
+                    <%= f.input :travel_risk_area_0_3 , label: "Travel To A High Risk Country/hot Spot Area In Previous 0-3 Months", input_html: {class: 'form-checkbox mr-1 p-1'} %>
 
                     <hr class="block pt-4" />
                     <h3 class="font-bold">Co-Morbidity History</h3>
-                    <%= f.input :cormobidity_hypertension , input_html: {class: 'form-checkbox mr-1 p-1'} %>
-                    <%= f.input :cormobidity_diabetes , input_html: {class: 'form-checkbox mr-1 p-1'} %>
-                    <%= f.input :cormobidity_cardio , input_html: {class: 'form-checkbox mr-1 p-1'} %>
-                    <%= f.input :cormobidity_liver , input_html: {class: 'form-checkbox mr-1 p-1'} %>
-                    <%= f.input :cormobidity_renal , input_html: {class: 'form-checkbox mr-1 p-1'} %>
-                    <%= f.input :cormobidity_hypercholestrolemia , input_html: {class: 'form-checkbox mr-1 p-1'} %>
-                    <%= f.input :cormobidity_std , input_html: {class: 'form-checkbox mr-1 p-1'} %>
-                    <%= f.input :cormobidity_cancer , input_html: {class: 'form-checkbox mr-1 p-1'} %>
-                    <%= f.input :cormobidity_pregnancy , input_html: {class: 'form-checkbox mr-1 p-1'} %>
-                    <%= f.input :cormobidity_respiratory , input_html: {class: 'form-checkbox mr-1 p-1'} %>
+                    <%= f.input :cormobidity_hypertension , label: "Hypertension", input_html: {class: 'form-checkbox mr-1 p-1'} %>
+                    <%= f.input :cormobidity_diabetes , label: "Diabetes", input_html: {class: 'form-checkbox mr-1 p-1'} %>
+                    <%= f.input :cormobidity_cardio , label: "Cardio Vascular Disease", input_html: {class: 'form-checkbox mr-1 p-1'} %>
+                    <%= f.input :cormobidity_liver , label: "Chronic Liver Disease", input_html: {class: 'form-checkbox mr-1 p-1'} %>
+                    <%= f.input :cormobidity_renal , label: "Chronic Renal Disease", input_html: {class: 'form-checkbox mr-1 p-1'} %>
+                    <%= f.input :cormobidity_hypercholestrolemia , label: "Hypercholestrolemia", input_html: {class: 'form-checkbox mr-1 p-1'} %>
+                    <%= f.input :cormobidity_std , label: "Sexually Transmitted Ds.", input_html: {class: 'form-checkbox mr-1 p-1'} %>
+                    <%= f.input :cormobidity_cancer , label: "Cancer Patient ", input_html: {class: 'form-checkbox mr-1 p-1'} %>
+                    <%= f.input :cormobidity_pregnancy , label: "Pregnancy", input_html: {class: 'form-checkbox mr-1 p-1'} %>
+                    <%= f.input :cormobidity_respiratory , label: "Any Respiratory Diseases", input_html: {class: 'form-checkbox mr-1 p-1'} %>
 
                     <hr class="block pt-4" />
                     <h3 class="font-bold">Treatment / Medical History</h3>
-                    <%= f.input :regular_treatment , input_html: {class: 'form-checkbox mr-1 p-1'} %>
-                    <%= f.input :surgeries_three_years , input_html: {class: 'form-checkbox mr-1 p-1'} %>
-                    <%= f.input :on_immunosuppresants , input_html: {class: 'form-checkbox mr-1 p-1'} %>
-                    <%= f.input :history_of_transplants , input_html: {class: 'form-checkbox mr-1 p-1'} %>
+                    <%= f.input :regular_treatment , label: "On Regular Treatment For Co Morbidities ", input_html: {class: 'form-checkbox mr-1 p-1'} %>
+                    <%= f.input :surgeries_three_years , label: "History Of Any Surgeries Done In The Previous Three Years", input_html: {class: 'form-checkbox mr-1 p-1'} %>
+                    <%= f.input :on_immunosuppresants , label: "On Immunosuppresants   / Steroid Therapy", input_html: {class: 'form-checkbox mr-1 p-1'} %>
+                    <%= f.input :history_of_transplants , label: "History Of Transplants", input_html: {class: 'form-checkbox mr-1 p-1'} %>
 
                     <hr class="block pt-4" />
                     <h3 class="font-bold">Symptoms History</h3>
-                    <%= f.input :asomia_cold_rhinorrhea , input_html: {class: 'form-checkbox mr-1 p-1'} %>
-                    <%= f.input :sorethroat_diarrhoea , input_html: {class: 'form-checkbox mr-1 p-1'} %>
-                    <%= f.input :fever_cough , input_html: {class: 'form-checkbox mr-1 p-1'} %>
-                    <%= f.input :breathing_difficulty , input_html: {class: 'form-checkbox mr-1 p-1'} %>
+                    <%= f.input :asomia_cold_rhinorrhea , label: "", input_html: {class: 'form-checkbox mr-1 p-1'} %>
+                    <%= f.input :sorethroat_diarrhoea , label: "", input_html: {class: 'form-checkbox mr-1 p-1'} %>
+                    <%= f.input :fever_cough , label: "", input_html: {class: 'form-checkbox mr-1 p-1'} %>
+                    <%= f.input :breathing_difficulty , label: "", input_html: {class: 'form-checkbox mr-1 p-1'} %>
                     <%= f.button :submit, 'Calculate Risk', class: 'mt-4 inline-flex items-center px-3 py-3 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150' %>
             </div>
             <% end %>
