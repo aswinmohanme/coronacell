@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_20_094216) do
+ActiveRecord::Schema.define(version: 2020_04_30_102822) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,13 +62,17 @@ ActiveRecord::Schema.define(version: 2020_04_20_094216) do
     t.boolean "surgeries_three_years"
     t.boolean "on_immunosuppresants"
     t.boolean "history_of_transplants"
-    t.boolean "asomia_cold_rhinorrhea"
-    t.boolean "sorethroat_diarrhoea"
-    t.boolean "fever_cough"
     t.boolean "breathing_difficulty"
     t.bigint "user_id"
     t.boolean "cormobidity_std"
     t.integer "score"
+    t.boolean "has_asomia"
+    t.boolean "has_cold"
+    t.boolean "has_rhinorrhea"
+    t.boolean "has_sorethroat"
+    t.boolean "has_diarrhoea"
+    t.boolean "has_fever"
+    t.boolean "has_cough"
     t.index ["panchayat_id"], name: "index_contacts_on_panchayat_id"
     t.index ["phone"], name: "index_contacts_on_phone", unique: true
     t.index ["user_id"], name: "index_contacts_on_user_id"

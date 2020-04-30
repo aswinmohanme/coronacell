@@ -185,9 +185,13 @@ class ContactsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def contact_params
-      params.require(:contact).permit(:name, :phone, :gender, :age, :house_name, :ward, :landmark, :panchayat_id, :ration_type, :willing_to_pay, :number_of_family_members, :feedback, :user_id, :date_of_contact, :tracking_type, :panchayat_feedback, :covid_19_was_confirmed,   :contact_with_suspected_14_days,   :contact_with_confirmed_14_days,   :travel_non_risk_area_4_6,   :travel_non_risk_area_0_3,   :travel_risk_area_4_6,   :travel_risk_area_0_3,   :cormobidity_hypertension,   :cormobidity_diabetes,   :cormobidity_cardio,   :cormobidity_liver,   :cormobidity_renal,   :cormobidity_hypercholestrolemia,   :cormobidity_std,   :cormobidity_cancer,   :cormobidity_pregnancy,   :cormobidity_respiratory,   :regular_treatment,   :surgeries_three_years,   :on_immunosuppresants,   :history_of_transplants,   :asomia_cold_rhinorrhea,   :sorethroat_diarrhoea,   :fever_cough,   :breathing_difficulty)
+      params.require(:contact).permit(:name, :phone, :gender, :age, :house_name, :ward, :landmark, :panchayat_id, :ration_type, :willing_to_pay, :number_of_family_members, :feedback, :user_id, :date_of_contact, :tracking_type, :panchayat_feedback, :covid_19_was_confirmed,   :contact_with_suspected_14_days,   :contact_with_confirmed_14_days,   :travel_non_risk_area_4_6,   :travel_non_risk_area_0_3,   :travel_risk_area_4_6,   :travel_risk_area_0_3,   :cormobidity_hypertension,   :cormobidity_diabetes,   :cormobidity_cardio,   :cormobidity_liver,   :cormobidity_renal,   :cormobidity_hypercholestrolemia,   :cormobidity_std,   :cormobidity_cancer,   :cormobidity_pregnancy,   :cormobidity_respiratory,   :regular_treatment,   :surgeries_three_years,   :on_immunosuppresants,   :history_of_transplants,   :asomia_cold_rhinorrhea,   :sorethroat_diarrhoea,   :fever_cough,   :breathing_difficulty, :has_asomia, :has_cough, :has_rhinorrhea, :has_sorethroat, :has_diarrhoea, :has_fever, :has_cough, :has_cold
+      )
     end
-    
+
+
+
+
   def calculate_risk_score(params)
     score_board = [
       {name: :covid_19_was_confirmed, score: 6},
@@ -211,10 +215,15 @@ class ContactsController < ApplicationController
       {name: :surgeries_three_years, score: 3},
       {name: :on_immunosuppresants, score: 4},
       {name: :history_of_transplants, score: 5},
-      {name: :asomia_cold_rhinorrhea, score: 1},
-      {name: :sorethroat_diarrhoea, score: 1},
-      {name: :fever_cough, score: 1},
-      {name: :breathing_difficulty, score: 1}
+      {name: :breathing_difficulty, score: 1},
+      {name: :has_asomia, score: 1},
+      {name: :has_cold, score: 1},
+      {name: :has_rhinorrhea, score: 1},
+      {name: :has_sorethroat, score: 1},
+      {name: :has_diarrhoea, score: 2},
+      {name: :has_fever, score: 2},
+      {name: :has_cough, score: 3},
+      {name: :breathing_difficulty,  score: 5},
     ]
     score = 0
     params.each do |p|
