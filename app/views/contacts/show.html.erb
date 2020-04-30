@@ -81,14 +81,6 @@
             </div>
             <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
                 <dt class="text-sm leading-5 font-medium text-gray-500">
-                    Score
-                </dt>
-                <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                    <%= @contact.score %>
-                </dd>
-            </div>
-            <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
-                <dt class="text-sm leading-5 font-medium text-gray-500">
                     Address
                 </dt>
                 <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
@@ -166,67 +158,101 @@
                 </dt>
                 <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
                     <%= simple_form_for @contact, defaults: { input_html: {class: 'form-input mt-1 font-sans'}, wrapper_html: {class: 'flex flex-col my-4'}, label_html: {class: 'mb-1'}} do |f|%>
-                        <hr class="block pt-4" />
-                        <h3 class="font-bold">COVID-19 History</h3>
-                        <%= f.input :covid_19_was_confirmed, input_html: {class: 'form-checkbox mr-1 p-1'}%>
+                    <hr class="block pt-4" />
+                    <h3 class="font-bold">COVID-19 History</h3>
+                    <%= f.input :covid_19_was_confirmed, label: "Was previously Covid-19 Confirmed",input_html: {class: 'form-checkbox mr-1 p-1'}%>
 
-                        <hr class="block pt-4" />
-                        <h3 class="font-bold">Contact History</h3>
-                        <%= f.input :contact_with_suspected_14_days , input_html: {class: 'form-checkbox mr-1 p-1'} %>
-                        <%= f.input :contact_with_confirmed_14_days , input_html: {class: 'form-checkbox mr-1 p-1'} %>
+                    <hr class="block pt-4" />
+                    <h3 class="font-bold">Contact History</h3>
+                    <%= f.input :contact_with_suspected_14_days , label: "Contact With A Suspected Case/ Contact / Co-traveller In Previous 14 Days", input_html: {class: 'form-checkbox mr-1 p-1'} %>
+                    <%= f.input :contact_with_confirmed_14_days , label: "Contact With A Confirmed Case Within Previous 14 Days", input_html: {class: 'form-checkbox mr-1 p-1'} %>
 
-                        <hr class="block pt-4" />
-                        <h3 class="font-bold">Travel History</h3>
-                        <%= f.input :travel_non_risk_area_4_6 , input_html: {class: 'form-checkbox mr-1 p-1'} %>
-                        <%= f.input :travel_non_risk_area_0_3 , input_html: {class: 'form-checkbox mr-1 p-1'} %>
-                        <%= f.input :travel_risk_area_4_6 , input_html: {class: 'form-checkbox mr-1 p-1'} %>
-                        <%= f.input :travel_risk_area_0_3 , input_html: {class: 'form-checkbox mr-1 p-1'} %>
+                    <hr class="block pt-4" />
+                    <h3 class="font-bold">Travel History</h3>
+                    <%= f.input :travel_non_risk_area_4_6 , label: "Travel To A Non High Risk / Non Hot Spot Area In Previous 4-6 Months ", input_html: {class: 'form-checkbox mr-1 p-1'} %>
+                    <%= f.input :travel_non_risk_area_0_3 , label: "Travel To A Non High Risk / Non Hot Spot Area  In Previous 0-3 Months", input_html: {class: 'form-checkbox mr-1 p-1'} %>
+                    <%= f.input :travel_risk_area_4_6 , label: "Travel To A High Risk Country/ Hot Spot Area In Previous 4-6 Months", input_html: {class: 'form-checkbox mr-1 p-1'} %>
+                    <%= f.input :travel_risk_area_0_3 , label: "Travel To A High Risk Country/hot Spot Area In Previous 0-3 Months", input_html: {class: 'form-checkbox mr-1 p-1'} %>
 
-                        <hr class="block pt-4" />
-                        <h3 class="font-bold">Co-Morbidity History</h3>
-                        <%= f.input :cormobidity_hypertension , input_html: {class: 'form-checkbox mr-1 p-1'} %>
-                        <%= f.input :cormobidity_diabetes , input_html: {class: 'form-checkbox mr-1 p-1'} %>
-                        <%= f.input :cormobidity_cardio , input_html: {class: 'form-checkbox mr-1 p-1'} %>
-                        <%= f.input :cormobidity_liver , input_html: {class: 'form-checkbox mr-1 p-1'} %>
-                        <%= f.input :cormobidity_renal , input_html: {class: 'form-checkbox mr-1 p-1'} %>
-                        <%= f.input :cormobidity_hypercholestrolemia , input_html: {class: 'form-checkbox mr-1 p-1'} %>
-                        <%= f.input :cormobidity_std , input_html: {class: 'form-checkbox mr-1 p-1'} %>
-                        <%= f.input :cormobidity_cancer , input_html: {class: 'form-checkbox mr-1 p-1'} %>
-                        <%= f.input :cormobidity_pregnancy , input_html: {class: 'form-checkbox mr-1 p-1'} %>
-                        <%= f.input :cormobidity_respiratory , input_html: {class: 'form-checkbox mr-1 p-1'} %>
+                    <hr class="block pt-4" />
+                    <h3 class="font-bold">Co-Morbidity History</h3>
+                    <%= f.input :cormobidity_hypertension , label: "Hypertension", input_html: {class: 'form-checkbox mr-1 p-1'} %>
+                    <%= f.input :cormobidity_diabetes , label: "Diabetes", input_html: {class: 'form-checkbox mr-1 p-1'} %>
+                    <%= f.input :cormobidity_cardio , label: "Cardio Vascular Disease", input_html: {class: 'form-checkbox mr-1 p-1'} %>
+                    <%= f.input :cormobidity_liver , label: "Chronic Liver Disease", input_html: {class: 'form-checkbox mr-1 p-1'} %>
+                    <%= f.input :cormobidity_renal , label: "Chronic Renal Disease", input_html: {class: 'form-checkbox mr-1 p-1'} %>
+                    <%= f.input :cormobidity_hypercholestrolemia , label: "Hypercholestrolemia", input_html: {class: 'form-checkbox mr-1 p-1'} %>
+                    <%= f.input :cormobidity_std , label: "Sexually Transmitted Ds.", input_html: {class: 'form-checkbox mr-1 p-1'} %>
+                    <%= f.input :cormobidity_cancer , label: "Cancer Patient ", input_html: {class: 'form-checkbox mr-1 p-1'} %>
+                    <%= f.input :cormobidity_pregnancy , label: "Pregnancy", input_html: {class: 'form-checkbox mr-1 p-1'} %>
+                    <%= f.input :cormobidity_respiratory , label: "Any Respiratory Diseases", input_html: {class: 'form-checkbox mr-1 p-1'} %>
 
-                        <hr class="block pt-4" />
-                        <h3 class="font-bold">Treatment / Medical History</h3>
-                        <%= f.input :regular_treatment , input_html: {class: 'form-checkbox mr-1 p-1'} %>
-                        <%= f.input :surgeries_three_years , input_html: {class: 'form-checkbox mr-1 p-1'} %>
-                        <%= f.input :on_immunosuppresants , input_html: {class: 'form-checkbox mr-1 p-1'} %>
-                        <%= f.input :history_of_transplants , input_html: {class: 'form-checkbox mr-1 p-1'} %>
+                    <hr class="block pt-4" />
+                    <h3 class="font-bold">Treatment / Medical History</h3>
+                    <%= f.input :regular_treatment , label: "On Regular Treatment For Co Morbidities ", input_html: {class: 'form-checkbox mr-1 p-1'} %>
+                    <%= f.input :surgeries_three_years , label: "History Of Any Surgeries Done In The Previous Three Years", input_html: {class: 'form-checkbox mr-1 p-1'} %>
+                    <%= f.input :on_immunosuppresants , label: "On Immunosuppresants   / Steroid Therapy", input_html: {class: 'form-checkbox mr-1 p-1'} %>
+                    <%= f.input :history_of_transplants , label: "History Of Transplants", input_html: {class: 'form-checkbox mr-1 p-1'} %>
 
-                        <hr class="block pt-4" />
-                        <h3 class="font-bold">Symptoms History</h3>
-                        <%= f.input :asomia_cold_rhinorrhea , input_html: {class: 'form-checkbox mr-1 p-1'} %>
-                        <%= f.input :sorethroat_diarrhoea , input_html: {class: 'form-checkbox mr-1 p-1'} %>
-                        <%= f.input :fever_cough , input_html: {class: 'form-checkbox mr-1 p-1'} %>
-                        <%= f.input :breathing_difficulty , input_html: {class: 'form-checkbox mr-1 p-1'} %>
-                        <%= f.button :submit, 'Save', class: 'mt-4 inline-flex items-center px-3 py-3 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150' %>
-                    </div>
-                    <% end %>
-                </dd>
+                    <hr class="block pt-4" />
+                    <h3 class="font-bold">Symptoms History</h3>
+                    <%= f.input :has_asomia, label: "Asomia", input_html: {class: 'form-checkbox mr-1 p-1'} %>
+                    <%= f.input :has_cold, label: "Cold", input_html: {class: 'form-checkbox mr-1 p-1'} %>
+                    <%= f.input :has_rhinorrhea, label: "Rhinorrhea", input_html: {class: 'form-checkbox mr-1 p-1'} %>
+                    <%= f.input :has_sorethroat, label: "Sore Throat", input_html: {class: 'form-checkbox mr-1 p-1'} %>
+                    <%= f.input :has_diarrhoea, label: "Diarrhoea", input_html: {class: 'form-checkbox mr-1 p-1'} %>
+                    <%= f.input :has_fever, label: "Fever", input_html: {class: 'form-checkbox mr-1 p-1'} %>
+                    <%= f.input :has_cough, label: "Cough", input_html: {class: 'form-checkbox mr-1 p-1'} %>
+                    <%= f.input :breathing_difficulty , label: "Breathing Difficulty", input_html: {class: 'form-checkbox mr-1 p-1'} %>
+                    <%= f.button :submit, 'Calculate Risk', class: 'mt-4 inline-flex items-center px-3 py-3 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150' %>
             </div>
-            <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
-                <dt class="text-sm leading-5 font-medium text-gray-500">
-                    Book Appointment
-                </dt>
-                <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                    <%= simple_form_for @contact, defaults: { input_html: {class: 'form-input mt-1 font-sans'}, wrapper_html: {class: 'flex flex-col my-4'}, label_html: {class: 'mb-1'}} do |f|%>
-                    <div class="">
-                        <%= f.association :user, label: "Assign Doctor", collection: User.where(role: :doctor), input_html: {class: 'form-select', id: 'dropdown-choice-select'} %>
-                        <%= f.input :feedback, label: 'Feedback Comments if Any' %>
-                        <%= f.button :submit, 'Save', class: 'inline-flex items-center px-3 py-3 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150' %>
-                    </div>
-                    <% end %>
-                </dd>
-            </div>
-        </dl>
+            <% end %>
+            </dd>
     </div>
+    <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
+        <dt class="text-sm leading-5 font-medium text-gray-500">
+            Score
+        </dt>
+        <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
+            <% score = @contact.score ? @contact.score : 0 %>
+            <% if score > 35 %>
+            <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium leading-5 bg-red-100 text-red-800">
+                Very High Risk
+            </span>
+            <% elsif score > 21 %>
+            <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium leading-5 bg-orange-100 text-orange-800">
+                High Risk
+            </span>
+            <% elsif score > 10 %>
+            <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium leading-5 bg-yellow-100 text-yellow-800">
+                Moderate Risk
+            </span>
+            <% elsif score > 5 %>
+            <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium leading-5 bg-indigo-100 text-indigo-800">
+                Low Risk
+            </span>
+            <% elsif score > 0 %>
+            <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium leading-5 bg-green-100 text-green-800">
+                Very Low Risk
+            </span>
+            <% end %>
+        </dd>
+    </div>
+    <div class="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
+        <dt class="text-sm leading-5 font-medium text-gray-500">
+            Book Appointment
+        </dt>
+        <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
+            <%= simple_form_for @contact, defaults: { input_html: {class: 'form-input mt-1 font-sans'}, wrapper_html: {class: 'flex flex-col my-4'}, label_html: {class: 'mb-1'}} do |f|%>
+            <div class="">
+                <%= f.association :user, label: "Assign Doctor", collection: User.where(role: :doctor), input_html: {class: 'form-select', id: 'dropdown-choice-select'} %>
+                <%= f.input :feedback_doctor, label: 'Feedback by Doctor' %>
+                <%= f.input :feedback_specialist, label: 'Feedback by Specialist' %>
+                <%= f.button :submit, 'Save', class: 'inline-flex items-center px-3 py-3 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150' %>
+            </div>
+            <% end %>
+        </dd>
+    </div>
+    </dl>
+</div>
 </div>
